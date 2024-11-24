@@ -69,7 +69,7 @@ def place_order(menu):
             update_order(order, menu_selection, menu_items)
         else:
             print("Your input is not valid. Please enter a number corresponding to the menu item.")
-
+        print(menu_items.keys())
         # TODO: Ask the customer if they would like to order anything else
         # TODO: Let the customer know if they should type 'n' or 'N' to quit
         customer_input = input(f"Would you like to order anything else?\n"
@@ -98,48 +98,66 @@ def place_order(menu):
     return order, order_total
 
 def update_order(order, menu_selection, menu_items):
-    # TODO: Check if the customer typed a number
-    if isinstance(menu_selection, int) and menu_selection in menu_items.keys():
-        # TODO: Convert the menu selection to an integer
-        # menu_selection = int(menu_selection)
+    """
+    Checks if the customer menu selection is valid, then updates the order.
 
-        # TODO: Check if the menu selection is in the menu items keys
-        # if menu_selection in menu_items.keys(): 
-            # TODO: Store the item name as a variable
+    Parameters:
+    order (list): A list of dictionaries containing the menu item name, price,
+                    and quantity ordered.
+    menu_selection (str): The customer's menu selection.
+    menu_items (dictionary): A dictionary containing the menu items and their
+                            prices.
+
+    Returns:
+    order (list): A list of dictionaries containing the menu item name, price,
+                    and quantity ordered (updated as needed).
+    """
+    # TODO: Check if the customer's input string can be converted 
+    # to an integer and prints an error message if it does not
+    if isinstance(menu_selection, int):
+        
+        # TODO: Convert the menu selection to an integer
+        if menu_selection in menu_items.keys():
+        # TODO: Write a conditional statement that checks if the customer's input is 
+        # an item on the menu and prints an error message if it is not
+
+            # Store the item name as a variable
+            # food_category = menu_items[menu_selection]["Food category"]
             item_name = menu_items[menu_selection]["Item name"]
             price = menu_items[menu_selection]["Price"]
+            # TODO: A prompt (input) to the customer that prints the name of the 
+            # menu item to the user and asks the quantity they would like to order.
+            # Store the return in a quantity variable
+            quantity_input = input(f"What quantity of {item_name} would you like? \n(This will default to 1 if number is not entered)")
 
-            # TODO: Ask the customer for the quantity of the menu item
-            # TODO: Use the item name variable in the question
-            quantity_input = input(f'How many of {item_name} do you want?')
-
-
-            # TODO: Check if the quantity is a number, default to 1 if not
+            # TODO: Write a conditional statement that checks if the input quantity 
+            # can be converted to an integer, then converts it to an integer. 
+            # Have it default to 1 if it does not.
             if quantity_input.isdigit():
                 quantity = int(quantity_input)
             else:
                 quantity = 1
 
-            # TODO: Add a dictionary to the order list 
-            # TODO: The dictionary should include the item name, price, and quantity
-            # TODO: Use the following names for the dictionary keys:
-            # TODO: "Item name", "Price", "Quantity"
+            # TODO: Add a dictionary with the item name, price, and quantity to the 
+            # order list. Use the following names for the dictionary keys:
+            # "Item name", "Price", "Quantity"
             order.append({
                 "Item name" : item_name,
                 "Price" : price,
                 "Quantity" : quantity
             })
-
         # TODO: When the user's input isn't valid, 
         # TODO: tell the customer that their input isn't valid
-    else: 
-        print("Your input is not valid.")
+        else:
+            print(menu_selection)
+            print(f'{item_name} was not a valid menu option')           
     # TODO: When the menu selection wasn't valid:
     # TODO: Print the menu selection and 
     # TODO: Tell the customer they didn't select a menu option
-    if menu_selection not in menu_items.keys():
+    else:
         print(menu_selection)
-        print('You did not select a menu option')
+        print(f'{menu_selection} was not a menu option')
+ 
     # TODO: Return the updated order
     return order
 
